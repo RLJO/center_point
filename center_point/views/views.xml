@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="service_parent_project_id_center" model="ir.ui.view">
+            <field name="name">service project</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='settings']//field[@name='user_id']" position="after">
+                    <field name="parent_project"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="insurance_form_view_id" model="ir.ui.view">
+            <field name="name">contracring</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="contracting_insurance"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="insurance_tree_view_id" model="ir.ui.view">
+            <field name="name">insurance</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="contracting_insurance"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="hjdbjh_hjjb_fjj" model="ir.ui.view">
+            <field name="name">fffggggg</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="after">
+                    <field name="contracting_insurance_ham"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
