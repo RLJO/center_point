@@ -8,5 +8,5 @@ from odoo.exceptions import UserError
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    partner_branch = fields.Many2one('res.partner', string='Partner Branch')
+    partner_project = fields.Many2one('project.project', string='Partner Branch')
 

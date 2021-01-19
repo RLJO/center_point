@@ -9,7 +9,7 @@
                     <field name="repair_ids" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='name']" position="after">
-                    <field name="partner_branch" attrs="{'invisible': [('parent.repair_ids', '=', False)]}"/>
+                    <field name="partner_project" attrs="{'invisible': [('parent.repair_ids', '=', False)]}"/>
                 </xpath>
             </field>
         </record>

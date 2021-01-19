@@ -93,7 +93,7 @@ class MakeTotalInvoice(models.TransientModel):
                         'product_uom_id': operation.product_uom.id,
                         'price_unit': operation.price_unit,
                         'product_id': operation.product_id.id,
-                        'partner_branch': repair.partner_id.id,
+                        'partner_project': repair.new_field_project_id.id,
                         'repair_line_ids': [(4, operation.id)],
                     }
 
@@ -136,7 +136,7 @@ class MakeTotalInvoice(models.TransientModel):
                         'product_uom_id': fee.product_uom.id,
                         'price_unit': fee.price_unit,
                         'product_id': fee.product_id.id,
-                        'partner_branch': repair.partner_id.id,
+                        'partner_project': repair.new_field_project_id.id,
                         'repair_fee_ids': [(4, fee.id)],
                     }
 
