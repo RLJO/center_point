@@ -6,7 +6,6 @@ import requests
 import json
 import re
 
-
 _logger = logging.getLogger(__name__)
 
 
@@ -14,6 +13,9 @@ class ProjectTask(models.Model):
     _inherit = 'project.task'
 
     whatsapp_msg_id = fields.Char('Whatsapp id')
+    sent = fields.Boolean('Message Sent')
+    technician_id = fields.Many2one('res.partner', 'Technician')
+    technician_mobile = fields.Char('Technician Mobile', related='technician_id.mobile')
 
     @api.model
     def create(self, vals):
@@ -34,69 +36,76 @@ class ProjectTask(models.Model):
     def send_message_on_whatsapp(self):
         Param = self.env['res.config.settings'].sudo().get_values()
         res_partner_id = self.env['res.partner'].search([('id', '=', self.user_id.partner_id.id)])
+        res_technician_id = self.technician_id
+        partners = [res_partner_id, res_technician_id]
         res_user_id = self.env['res.users'].search([('id', '=', self.env.user.id)])
-        if res_partner_id.country_id.phone_code and res_partner_id.mobile:
-            msg = ''
-            if self.project_id.name:
-                msg += "*Project:* "+self.project_id.name
-            if self.name:
-                msg += "\n*Task name:* "+self.name
-            if self.date_deadline:
-                msg+= "\n*Deadline:* "+str(self.date_deadline)
-            if len(self.description) > 11:
-                msg += "\n*Description:* "+self.cleanhtml(self.description)
-            msg = "Hello " + res_partner_id.name + "," + "\nNew task assigned to you" + "\n" + msg
+        msg = ''
+        if self.project_id.name:
+            msg += "*Project:* " + self.project_id.name
+        if self.name:
+            msg += "\n*Task name:* " + self.name
+        if self.date_deadline:
+            msg += "\n*Deadline:* " + str(self.date_deadline)
+        if len(self.description) > 11:
+            msg += "\n*Description:* " + self.cleanhtml(self.description)
+        for partner in partners:
+            if partner.country_id.phone_code and partner.mobile:
+                msg = "Hello " + partner.name + "," + "\nNew task assigned to you" + "\n" + msg
 
-            # msg = "Hello " + res_partner_id.name+","+ "\nNew task assigned to you"+"\n"+"*Project:* "+self.project_id.name+"\n*Task name:* "+self.name+"\n*Deadline:* "+str(
-            #     self.date_deadline)+"\n*Description:* "+self.cleanhtml(self.description)
-            if res_user_id.has_group('pragmatic_odoo_whatsapp_integration.group_project_enable_signature'):
-                user_signature = self.cleanhtml(res_user_id.signature)
-                msg += "\n\n" + user_signature
+                if res_user_id.has_group('pragmatic_odoo_whatsapp_integration.group_project_enable_signature'):
+                    user_signature = self.cleanhtml(res_user_id.signature)
+                    msg += "\n\n" + user_signature
 
-            url = 'https://api.chat-api.com/instance' + Param.get('whatsapp_instance_id') + '/sendMessage?token=' + Param.get('whatsapp_token')
-            headers = {
-                "Content-Type": "application/json",
-            }
-            whatsapp_msg_number = res_partner_id.mobile
-            whatsapp_msg_number_without_space = whatsapp_msg_number.replace(" ", "");
-            whatsapp_msg_number_without_code = whatsapp_msg_number_without_space.replace('+' + str(res_partner_id.country_id.phone_code), "")
-            tmp_dict = {
-                # "phone": "+" + str(res_partner_id.country_id.phone_code) + "" + res_partner_id.mobile,
-                "phone": "+" + str(res_partner_id.country_id.phone_code) + "" + whatsapp_msg_number_without_code,
-                # "body": "Hello "+res_partner_id.name+","+ "\nNew task assigned to you"+"\n"+"*"+"Project:"+"*"+self.project_id.name
-               "body": msg
+                url = 'https://api.chat-api.com/instance' + Param.get(
+                    'whatsapp_instance_id') + '/sendMessage?token=' + Param.get('whatsapp_token')
+                headers = {
+                    "Content-Type": "application/json",
+                }
+                whatsapp_msg_number = partner.mobile
+                whatsapp_msg_number_without_space = whatsapp_msg_number.replace(" ", "");
+                whatsapp_msg_number_without_code = whatsapp_msg_number_without_space.replace(
+                    '+' + str(partner.country_id.phone_code), "")
+                tmp_dict = {
+                    "phone": "+" + str(partner.country_id.phone_code) + "" + whatsapp_msg_number_without_code,
+                    "body": msg
 
-            }
-            response = requests.post(url, json.dumps(tmp_dict), headers=headers)
+                }
 
-            if response.status_code == 201 or response.status_code == 200:
-                _logger.info("\nSend Message successfully")
-                response_dict = response.json()
-                self.whatsapp_msg_id = response_dict.get('id')
-                mail_message_obj = self.env['mail.message']
-                comment = "fa fa-whatsapp"
-                body_html = tools.append_content_to_html('<div class = "%s"></div>' % tools.ustr(comment), msg)
-                body_msg = self.convert_to_html(body_html)
+                response = requests.post(url, json.dumps(tmp_dict), headers=headers)
+                print('response.status_code... ', response.status_code)
+                if response.status_code == 201 or response.status_code == 200:
+                    _logger.info("\nSend Message successfully")
+                    response_dict = response.json()
+                    self.whatsapp_msg_id = response_dict.get('id')
+                    mail_message_obj = self.env['mail.message']
+                    comment = "fa fa-whatsapp"
+                    body_html = tools.append_content_to_html('<div class = "%s"></div>' % tools.ustr(comment), msg)
+                    body_msg = self.convert_to_html(body_html)
 
-                if self.env['ir.config_parameter'].sudo().get_param('pragmatic_odoo_whatsapp_integration.group_project_display_chatter_message'):
-                    mail_message_id = mail_message_obj.sudo().create({
-                        'res_id': self.id,
-                        'model': 'project.task',
-                        'body': body_msg,
-                    })
+                    if self.env['ir.config_parameter'].sudo().get_param(
+                            'pragmatic_odoo_whatsapp_integration.group_project_display_chatter_message'):
+                        mail_message_id = mail_message_obj.sudo().create({
+                            'res_id': self.id,
+                            'model': 'project.task',
+                            'body': body_msg,
+                        })
+                        # if partner == res_technician_id:
+                        #     self.sent = True
 
     def _assigned_task_done(self):
         project_task_ids = self.env['project.task'].search([('whatsapp_msg_id', '!=', None)])
         Param = self.env['res.config.settings'].sudo().get_values()
-
 
         for project_task_id in project_task_ids:
             res_partner_id = self.env['res.partner'].search([('id', '=', project_task_id.user_id.partner_id.id)])
             whatsapp_msg_number = res_partner_id.mobile
             whatsapp_msg_number_without_space = whatsapp_msg_number.replace(" ", "");
 
-            url = 'https://api.chat-api.com/instance' +Param.get('whatsapp_instance_id') + '/messages?lastMessageNumber=1&last=true&chatId='+ \
-                  str(res_partner_id.country_id.phone_code) +''+whatsapp_msg_number_without_space[-10:] +'@c.us&limit=100&token='+ Param.get('whatsapp_token')
+            url = 'https://api.chat-api.com/instance' + Param.get(
+                'whatsapp_instance_id') + '/messages?lastMessageNumber=1&last=true&chatId=' + \
+                  str(res_partner_id.country_id.phone_code) + '' + whatsapp_msg_number_without_space[
+                                                                   -10:] + '@c.us&limit=100&token=' + Param.get(
+                'whatsapp_token')
             response = requests.get(url)
 
             if response.status_code == 201 or response.status_code == 200:

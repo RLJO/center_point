@@ -5,7 +5,6 @@
             <xpath expr="." position="inside">
                 <script type="text/javascript" src="/pragmatic_odoo_whatsapp_integration/static/src/js/many2many_tags_mobile.js"></script>
             </xpath>
-
         </template>
     </data>
 </odoo>

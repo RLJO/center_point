@@ -109,16 +109,37 @@ class SendWAMessageResPartner(models.TransientModel):
         res_name = 'Invoice_' + rec.number.replace('/', '_') if active_model == 'account.move' else rec.name.replace(
             '/', '_')
         msg = result.get('message', '')
+        if active_model == 'project.task':
+            if rec.name:
+                msg += "*Project:* " + rec.project_id.name
+            if rec.name:
+                msg += "\n*Task name:* " + rec.name
+            if rec.date_deadline:
+                msg += "\n*Deadline:* " + str(rec.date_deadline)
+            if len(rec.description) > 11:
+                msg += "\n*Description:* " + rec.cleanhtml(rec.description)
         result['message'] = msg
 
         if not self.env.context.get('default_recipients') and active_model and hasattr(self.env[active_model],
                                                                                        '_sms_get_default_partners'):
             model = self.env[active_model]
             records = self._get_records(model)
-            partners = records._sms_get_default_partners()
+            if active_model == 'project.task':
+                #     if rec.name:
+                #         msg += "*Project:* " + rec.project_id.name
+                #     if rec.name:
+                #         msg += "\n*Task name:* " + rec.name
+                #     if rec.date_deadline:
+                #         msg += "\n*Deadline:* " + str(rec.date_deadline)
+                #     if len(rec.description) > 11:
+                #         msg += "\n*Description:* " + rec.cleanhtml(rec.description)
+                partners = records.technician_id
+            else:
+                partners = records._sms_get_default_partners()
             phone_numbers = []
             no_phone_partners = []
-            if active_model != 'res.partner':
+            print('active Model is.. ', active_model)
+            if active_model != 'res.partner' and active_model != 'project.task':
                 is_attachment_exists = Attachment.search(
                     [('res_id', '=', res_id), ('name', 'like', res_name + '%'), ('res_model', '=', active_model)],
                     limit=1)
@@ -135,8 +156,8 @@ class SendWAMessageResPartner(models.TransientModel):
                             template = self.env.ref('purchase.email_template_edi_purchase_done')
                     elif active_model == 'stock.picking':
                         template = self.env.ref('stock.mail_template_data_delivery_confirmation')
-                    elif active_model == 'account.payment':
-                        template = self.env.ref('account.mail_template_data_payment_receipt')
+                    elif active_model == 'stock.picking':
+                        template = self.env.ref('stock.mail_template_data_delivery_confirmation')
 
                     report = template.report_template
                     report_service = report.report_name
@@ -190,9 +211,12 @@ class SendWAMessageResPartner(models.TransientModel):
             'whatsapp_instance_id') + '/status?token=' + Param.get('whatsapp_token')
         status_response = requests.get(status_url)
         json_response_status = json.loads(status_response.text)
+        print('status_response.status_code 1.... ', status_response.status_code)
+
         if (status_response.status_code == 200 or status_response.status_code == 201) and json_response_status[
             'accountStatus'] == 'authenticated':
-            if active_model == 'res.partner':
+            if active_model == 'res.partner' or active_model == 'project.task':
+                print('Im IN... ', active_model)
                 for res_partner_id in self.partner_ids:
 
                     # res_partner_id = self.env['res.partner'].search([('id', '=', active_id)])
@@ -391,6 +415,9 @@ class SendWAMessageSendResPartner(models.TransientModel):
             'whatsapp_instance_id') + '/status?token=' + Param.get('whatsapp_token')
         status_response = requests.get(status_url)
         json_response_status = json.loads(status_response.text)
+
+        print('status_response.status_code 2.... ', status_response.status_code)
+        # print('json_response_status.... ', json_response_status['accountStatus'])
         if (status_response.status_code == 200 or status_response.status_code == 201) and json_response_status[
             'accountStatus'] == 'authenticated':
             if active_model == 'res.partner':
@@ -626,15 +653,15 @@ class SendWAMessage(models.TransientModel):
                             msg += "(with reference: " + rec.origin + ")"
                         msg += " with Total Amount " + self.format_amount(rec.amount_total,
                                                                           rec.pricelist_id.currency_id) + "."
-                    if self.env['ir.config_parameter'].sudo().get_param(
-                            'pragmatic_odoo_whatsapp_integration.group_order_product_details_msg'):
-                        msg += "\n\nFollowing is your order details."
-                        for line_id in rec.order_line:
-                            msg += "\n\n*Product:* " + line_id.product_id.name + "\n*Qty:* " + str(
-                                line_id.product_uom_qty) + " " + str(
-                                line_id.product_uom.name) + "\n*Unit Price:* " + str(
-                                line_id.price_unit) + "\n*Subtotal:* " + str(line_id.price_subtotal)
-                            msg += "\n------------------"
+                    # if self.env['ir.config_parameter'].sudo().get_param(
+                    #         'pragmatic_odoo_whatsapp_integration.group_order_product_details_msg'):
+                    #     msg += "\n\nFollowing is your order details."
+                    #     for line_id in rec.order_line:
+                    #         msg += "\n\n*Product:* " + line_id.product_id.name + "\n*Qty:* " + str(
+                    #             line_id.product_uom_qty) + " " + str(
+                    #             line_id.product_uom.name) + "\n*Unit Price:* " + str(
+                    #             line_id.price_unit) + "\n*Subtotal:* " + str(line_id.price_subtotal)
+                    #         msg += "\n------------------"
                     msg += "\n Please find attached document which will help you to get detailed information."
                     # if rec
                     if res_user_id.has_group('pragmatic_odoo_whatsapp_integration.group_enable_signature'):
