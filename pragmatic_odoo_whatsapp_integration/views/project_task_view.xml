@@ -6,7 +6,21 @@
         <field name="inherit_id" ref="project.view_task_form2"/>
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="whatsapp_msg_id" readonly="True"/>
+                <field name="whatsapp_msg_id" readonly="True" invisible="1"/>
+                <field name="technician_id"/>
+                <label for="technician_mobile"/>
+                <div class="o_row">
+                    <field name="technician_mobile"/>
+                    <button
+                            type="action"
+                            name="%(pragmatic_odoo_whatsapp_integration.send_whatsapp_msg_res_partner_template_action)d"
+                            class="btn-sm btn-link mb4 fa fa-whatsapp"
+                            aria-label="Send WhatsApp Message"
+                            title="Send WhatsApp Message"
+                            attrs="{'invisible':[('technician_mobile', '=', False)]}"
+                            context="{'field_name': 'mobile'}"
+                    />
+                </div>
             </field>
 
 <!--            <field name="project_id" position="attributes">-->
