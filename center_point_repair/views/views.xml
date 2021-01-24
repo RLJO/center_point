@@ -62,8 +62,8 @@
             </xpath>
             <xpath expr="//notebook" position="inside">
                 <page string="check List">
-                        <field name="name_cp_id"/>
-                        <field name="html_cp_maint"/>
+                        <field name="name_center_point"/>
+                        <field name="cp_id"/>
                 </page>
             </xpath>
         </field>

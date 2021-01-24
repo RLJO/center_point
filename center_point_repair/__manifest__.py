@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','repair','project','industry_fsm'],
+    'depends': ['base','repair', 'industry_fsm'],
 
     # always loaded
     'data': [
