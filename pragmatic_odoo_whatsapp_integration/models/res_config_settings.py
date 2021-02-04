@@ -86,49 +86,43 @@ class base(models.TransientModel):
             'pragmatic_odoo_whatsapp_integration.group_enable_signature')
         res['group_display_chatter_message'] = Param.sudo().get_param(
             'pragmatic_odoo_whatsapp_integration.group_display_chatter_message')
+        res['group_order_product_details_msg'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_order_product_details_msg')
+        res['group_order_info_msg'] = Param.sudo().get_param('pragmatic_odoo_whatsapp_integration.group_order_info_msg')
 
-        # res['group_order_product_details_msg'] = Param.sudo().get_param(
-        # 'pragmatic_odoo_whatsapp_integration.group_order_product_details_msg') res['group_order_info_msg'] =
-        # Param.sudo().get_param('pragmatic_odoo_whatsapp_integration.group_order_info_msg')
+        # res['group_purchase_send_report_url_in_message'] = Param.sudo().get_param('pragmatic_odoo_whatsapp_integration.group_purchase_send_report_url_in_message')
+        res['group_purchase_enable_signature'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_purchase_enable_signature')
+        res['group_purchase_display_chatter_message'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_purchase_display_chatter_message')
+        res['group_purchase_order_product_details_msg'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_purchase_order_product_details_msg')
+        res['group_purchase_order_info_msg'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_purchase_order_info_msg')
 
-        # res['group_purchase_send_report_url_in_message'] = Param.sudo().get_param(
-        # 'pragmatic_odoo_whatsapp_integration.group_purchase_send_report_url_in_message') res[
-        # 'group_purchase_enable_signature'] = Param.sudo().get_param(
-        # 'pragmatic_odoo_whatsapp_integration.group_purchase_enable_signature')
-        #
-        # res['group_purchase_display_chatter_message'] = Param.sudo().get_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_purchase_display_chatter_message')
-        #
-        # res['group_purchase_order_product_details_msg'] = Param.sudo().get_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_purchase_order_product_details_msg')
-        #
-        # res['group_purchase_order_info_msg'] = Param.sudo().get_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_purchase_order_info_msg')
-
-        # res['group_stock_send_report_url_in_message'] = Param.sudo().get_param(
-        # 'pragmatic_odoo_whatsapp_integration.group_stock_send_report_url_in_message') res[
-        # 'group_stock_enable_signature'] = Param.sudo().get_param(
-        # 'pragmatic_odoo_whatsapp_integration.group_stock_enable_signature') res[
-        # 'group_stock_display_chatter_message'] = Param.sudo().get_param(
-        # 'pragmatic_odoo_whatsapp_integration.group_stock_display_chatter_message') res[
-        # 'group_stock_product_details_msg'] = Param.sudo().get_param(
-        # 'pragmatic_odoo_whatsapp_integration.group_stock_product_details_msg') res['group_stock_info_msg'] =
-        # Param.sudo().get_param('pragmatic_odoo_whatsapp_integration.group_stock_info_msg')
+        # res['group_stock_send_report_url_in_message'] = Param.sudo().get_param('pragmatic_odoo_whatsapp_integration.group_stock_send_report_url_in_message')
+        res['group_stock_enable_signature'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_stock_enable_signature')
+        res['group_stock_display_chatter_message'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_stock_display_chatter_message')
+        res['group_stock_product_details_msg'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_stock_product_details_msg')
+        res['group_stock_info_msg'] = Param.sudo().get_param('pragmatic_odoo_whatsapp_integration.group_stock_info_msg')
 
         # res['group_invoice_send_report_url_in_message'] = Param.sudo().get_param('pragmatic_odoo_whatsapp_integration.group_invoice_send_report_url_in_message')
-        # res['group_invoice_enable_signature'] = Param.sudo().get_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_invoice_enable_signature')
-        # res['group_invoice_display_chatter_message'] = Param.sudo().get_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_invoice_display_chatter_message')
-        # res['group_invoice_product_details_msg'] = Param.sudo().get_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_invoice_product_details_msg')
-        # res['group_invoice_info_msg'] = Param.sudo().get_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_invoice_info_msg')
-        #
-        # res['group_crm_enable_signature'] = Param.sudo().get_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_crm_enable_signature')
-        # res['group_crm_display_chatter_message'] = Param.sudo().get_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_crm_display_chatter_message')
+        res['group_invoice_enable_signature'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_invoice_enable_signature')
+        res['group_invoice_display_chatter_message'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_invoice_display_chatter_message')
+        res['group_invoice_product_details_msg'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_invoice_product_details_msg')
+        res['group_invoice_info_msg'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_invoice_info_msg')
+
+        res['group_crm_enable_signature'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_crm_enable_signature')
+        res['group_crm_display_chatter_message'] = Param.sudo().get_param(
+            'pragmatic_odoo_whatsapp_integration.group_crm_display_chatter_message')
 
         res['group_project_enable_signature'] = Param.sudo().get_param(
             'pragmatic_odoo_whatsapp_integration.group_project_enable_signature')
@@ -143,61 +137,59 @@ class base(models.TransientModel):
                                                          self.whatsapp_instance_id)
         self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.whatsapp_token',
                                                          self.whatsapp_token)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        # 'pragmatic_odoo_whatsapp_integration.group_send_report_url_in_message',
-        # self.group_send_report_url_in_message)
+        # self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_send_report_url_in_message', self.group_send_report_url_in_message)
         self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_enable_signature',
                                                          self.group_enable_signature)
         self.env['ir.config_parameter'].sudo().set_param(
             'pragmatic_odoo_whatsapp_integration.group_display_chatter_message', self.group_display_chatter_message)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_order_product_details_msg', self.group_order_product_details_msg)
+        self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_order_info_msg',
+                                                         self.group_order_info_msg)
 
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_order_product_details_msg', self.group_order_product_details_msg)
-        # self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_order_info_msg',
-        #                                                  self.group_order_info_msg)
         # self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_purchase_send_report_url_in_message', self.group_purchase_send_report_url_in_message)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_purchase_enable_signature', self.group_purchase_enable_signature)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_purchase_display_chatter_message',
-        #     self.group_purchase_display_chatter_message)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_purchase_order_product_details_msg',
-        #     self.group_purchase_order_product_details_msg)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_purchase_order_info_msg', self.group_purchase_order_info_msg)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_purchase_enable_signature', self.group_purchase_enable_signature)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_purchase_display_chatter_message',
+            self.group_purchase_display_chatter_message)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_purchase_order_product_details_msg',
+            self.group_purchase_order_product_details_msg)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_purchase_order_info_msg', self.group_purchase_order_info_msg)
 
         # self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_stock_send_report_url_in_message',
         #                                                  self.group_stock_send_report_url_in_message)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_stock_enable_signature', self.group_stock_enable_signature)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_stock_display_chatter_message',
-        #     self.group_stock_display_chatter_message)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_stock_product_details_msg',
-        #     self.group_stock_product_details_msg)
-        # self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_stock_info_msg',
-        #                                                  self.group_stock_info_msg)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_stock_enable_signature', self.group_stock_enable_signature)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_stock_display_chatter_message',
+            self.group_stock_display_chatter_message)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_stock_product_details_msg',
+            self.group_stock_product_details_msg)
+        self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_stock_info_msg',
+                                                         self.group_stock_info_msg)
 
         # self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_invoice_send_report_url_in_message',
         #                                                  self.group_invoice_send_report_url_in_message)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_invoice_enable_signature', self.group_invoice_enable_signature)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_invoice_display_chatter_message',
-        #     self.group_invoice_display_chatter_message)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_invoice_product_details_msg',
-        #     self.group_invoice_product_details_msg)
-        # self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_invoice_info_msg',
-        #                                                  self.group_invoice_info_msg)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_invoice_enable_signature', self.group_invoice_enable_signature)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_invoice_display_chatter_message',
+            self.group_invoice_display_chatter_message)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_invoice_product_details_msg',
+            self.group_invoice_product_details_msg)
+        self.env['ir.config_parameter'].sudo().set_param('pragmatic_odoo_whatsapp_integration.group_invoice_info_msg',
+                                                         self.group_invoice_info_msg)
 
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_crm_enable_signature', self.group_crm_enable_signature)
-        # self.env['ir.config_parameter'].sudo().set_param(
-        #     'pragmatic_odoo_whatsapp_integration.group_crm_display_chatter_message',
-        #     self.group_crm_display_chatter_message)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_crm_enable_signature', self.group_crm_enable_signature)
+        self.env['ir.config_parameter'].sudo().set_param(
+            'pragmatic_odoo_whatsapp_integration.group_crm_display_chatter_message',
+            self.group_crm_display_chatter_message)
 
         self.env['ir.config_parameter'].sudo().set_param(
             'pragmatic_odoo_whatsapp_integration.group_project_enable_signature', self.group_project_enable_signature)
@@ -209,7 +201,6 @@ class base(models.TransientModel):
                                                          self.qr_code_image)
 
     def action_get_qr_code(self):
-        print('in action_get_qr_code')
         return {
             'name': _("Scan WhatsApp QR Code"),
             'view_mode': 'form',
