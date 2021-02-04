@@ -34,6 +34,7 @@ class ProjectTask(models.Model):
         return message
 
     def send_message_on_whatsapp(self):
+
         Param = self.env['res.config.settings'].sudo().get_values()
         res_partner_id = self.env['res.partner'].search([('id', '=', self.user_id.partner_id.id)])
         res_technician_id = self.technician_id
@@ -46,9 +47,8 @@ class ProjectTask(models.Model):
             msg += "\n*Task name:* " + self.name
         if self.date_deadline:
             msg += "\n*Deadline:* " + str(self.date_deadline)
-        if self.description:
-            if len(self.description) > 11:
-                msg += "\n*Description:* " + self.cleanhtml(self.description)
+        if len(self.description) > 11:
+            msg += "\n*Description:* " + self.cleanhtml(self.description)
         for partner in partners:
             if partner.country_id.phone_code and partner.mobile:
                 msg = "Hello " + partner.name + "," + "\nNew task assigned to you" + "\n" + msg

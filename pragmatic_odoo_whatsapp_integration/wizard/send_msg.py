@@ -116,10 +116,6 @@ class SendWAMessageResPartner(models.TransientModel):
                 msg += "\n*Task name:* " + rec.name
             if rec.date_deadline:
                 msg += "\n*Deadline:* " + str(rec.date_deadline)
-            # if rec.planned_date_begin:
-            #     msg += "\n*Planned Date Begin:* " + str(rec.planned_date_begin)
-            # if rec.planned_date_end:
-            #     msg += "\n*Planned Date End:* " + str(rec.planned_date_end)
             if len(rec.description) > 11:
                 msg += "\n*Description:* " + rec.cleanhtml(rec.description)
         result['message'] = msg
@@ -215,13 +211,15 @@ class SendWAMessageResPartner(models.TransientModel):
             'whatsapp_instance_id') + '/status?token=' + Param.get('whatsapp_token')
         status_response = requests.get(status_url)
         json_response_status = json.loads(status_response.text)
-        print('status_response.status_code 1.... ', status_response.status_code)
+        print('status_response.status_code hi.... ', status_response.status_code)
 
         if (status_response.status_code == 200 or status_response.status_code == 201) and json_response_status[
             'accountStatus'] == 'authenticated':
-            if active_model == 'res.partner' or active_model == 'project.task':
-                print('Im IN 1... ', active_model)
+            if active_model == 'res.partner':
                 for res_partner_id in self.partner_ids:
+
+                    # res_partner_id = self.env['res.partner'].search([('id', '=', active_id)])
+
                     number = str(res_partner_id.country_id.phone_code) + res_partner_id.mobile
                     if res_partner_id.country_id.phone_code and res_partner_id.mobile:
                         whatsapp_number = res_partner_id.mobile
@@ -417,11 +415,11 @@ class SendWAMessageSendResPartner(models.TransientModel):
         status_response = requests.get(status_url)
         json_response_status = json.loads(status_response.text)
 
-        print('status_response.status_code 2.... ', status_response.status_code)
+        print('status_response.status_code hi.... ', status_response.status_code)
+        # print('json_response_status.... ', json_response_status['accountStatus'])
         if (status_response.status_code == 200 or status_response.status_code == 201) and json_response_status[
             'accountStatus'] == 'authenticated':
-            if active_model == 'res.partner' or active_model == 'project.task':
-                print('Im IN 2... ', active_model)
+            if active_model == 'res.partner':
                 for res_partner_id in self.partner_ids:
 
                     # res_partner_id = self.env['res.partner'].search([('id', '=', active_id)])
@@ -847,7 +845,7 @@ class SendWAMessage(models.TransientModel):
         json_response_status = json.loads(status_response.text)
         if (status_response.status_code == 200 or status_response.status_code == 201) and json_response_status[
             'accountStatus'] == 'authenticated':
-            if active_model == 'res.partner' or active_model == 'project.task':
+            if active_model == 'res.partner':
                 for res_partner_id in self.partner_ids:
 
                     # res_partner_id = self.env['res.partner'].search([('id', '=', active_id)])
