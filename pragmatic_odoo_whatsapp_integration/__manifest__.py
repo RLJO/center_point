@@ -56,6 +56,7 @@ Features of Whatsapp Odoo All in one Integration
         # 'views/account_invoicing_res_config_settings_view.xml',
         # 'views/crm_res_config_settings_view.xml',
         'views/project_task_res_config_settings_view.xml',
+        # 'data/project_mail_template_data.xml',
         # 'views/account_payment_view.xml',
         'views/login_template.xml'
     ],

@@ -98,6 +98,3 @@ class AuthSignupHomeDerived(AuthSignupHome):
             values['lang'] = request.lang
         self._signup_with_values(qcontext.get('token'), values)
         request.env.cr.commit()
-    #
-    #
-    #
