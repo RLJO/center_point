@@ -22,7 +22,7 @@
                     <field name="mobile" widget="phone"/>
                     <button
                             type="action"
-                            name="%(pragmatic_odoo_whatsapp_integration.send_whatsapp_msg_res_partner_template_action)d"
+                            name="%(odoo_whatsapp_integration.send_whatsapp_msg_res_partner_template_action)d"
                             class="btn-sm btn-link mb4 fa fa-whatsapp"
                             aria-label="Send WhatsApp Message"
                             title="Send WhatsApp Message"
