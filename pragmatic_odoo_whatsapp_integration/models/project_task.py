@@ -46,9 +46,8 @@ class ProjectTask(models.Model):
             msg += "\n*Task name:* " + self.name
         if self.date_deadline:
             msg += "\n*Deadline:* " + str(self.date_deadline)
-        if self.description:
-            if len(self.description) > 11:
-                msg += "\n*Description:* " + self.cleanhtml(self.description)
+        if len(self.description) > 11:
+            msg += "\n*Description:* " + self.cleanhtml(self.description)
         for partner in partners:
             if partner.country_id.phone_code and partner.mobile:
                 msg = "Hello " + partner.name + "," + "\nNew task assigned to you" + "\n" + msg
