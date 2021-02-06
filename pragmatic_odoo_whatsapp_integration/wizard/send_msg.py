@@ -116,8 +116,16 @@ class SendWAMessageResPartner(models.TransientModel):
                 msg += "\n*Task name:* " + rec.name
             if rec.date_deadline:
                 msg += "\n*Deadline:* " + str(rec.date_deadline)
-            if len(rec.description) > 11:
-                msg += "\n*Description:* " + rec.cleanhtml(rec.description)
+            if rec.date_deadline:
+                msg += "\n*Deadline:* " + str(rec.date_deadline)
+            if rec.planned_date_begin:
+                msg += "\n*Planned Date Begin:* " + str(rec.planned_date_begin)
+            if rec.planned_date_end:
+                msg += "\n*Planned Date End:* " + str(rec.planned_date_end)
+            if rec.description:
+                print('test')
+                if len(rec.description) > 11:
+                    msg += "\n*Description:* " + rec.cleanhtml(rec.description)
         result['message'] = msg
 
         if not self.env.context.get('default_recipients') and active_model and hasattr(self.env[active_model],
@@ -138,7 +146,7 @@ class SendWAMessageResPartner(models.TransientModel):
                 partners = records._sms_get_default_partners()
             phone_numbers = []
             no_phone_partners = []
-            print('active Model is.. ', active_model)
+            print('active Model isss.. ', active_model)
             if active_model != 'res.partner' and active_model != 'project.task':
                 is_attachment_exists = Attachment.search(
                     [('res_id', '=', res_id), ('name', 'like', res_name + '%'), ('res_model', '=', active_model)],
