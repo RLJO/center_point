@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'account', 'repair', 'center_point_repair', 'project','center_point_repair_check_list'],
+    'depends': ['base', 'account', 'repair','project','center_point_repair_check_list'],
 
     # always loaded
     'data': [
