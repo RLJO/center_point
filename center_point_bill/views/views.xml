@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="approval_state_form_id" model="ir.ui.view">
+            <field name="name">approve</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='request_owner_id']" position="after">
+                    <field name="approve_state"/>
+                    <!--                    <field name="rfq_id"/>-->
+                    <!--                    <field name="wh_document_id"/>-->
+                </xpath>
+
+                <xpath expr="//field[@name='approve_state']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('category_id', '!=',9)]}</attribute>
+                </xpath>
+
+                <!--                <xpath expr="//field[@name='rfq_id']" position="attributes">-->
+                <!--                    <attribute name="attrs">{'invisible': [('category_id', '!=',8)]}</attribute>-->
+                <!--                </xpath>-->
+
+                <!--                <xpath expr="//field[@name='wh_document_id']" position="attributes">-->
+                <!--                    <attribute name="attrs">{'invisible': [('category_id', '!=',10)]}</attribute>-->
+                <!--                </xpath>-->
+
+            </field>
+        </record>
+
+        <record id="sale_request_status_form_id" model="ir.ui.view">
+            <field name="name">salerequest</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="sale_state"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

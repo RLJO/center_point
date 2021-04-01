@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <template id="inherit_report_invoice_id" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@class='page']" position="after">
+                <br/>
+                <br/>
+                <div id="invoice_report_id">
+                    <br/>
+                    <br/>
+                    <h>
+                        <span style="float:left">
+                            <strong>/اسم المستلم</strong>
+                        </span>
+                        <span style="float:right">
+                            <strong>/المسؤل</strong>
+                        </span>
+                    </h>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <strong>/التوقيع</strong>
+                </div>
+            </xpath>
+        </template>
+
+
+    </data>
+</odoo>
