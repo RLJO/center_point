@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="sq_account_payment_view_form" model="ir.ui.view">
+        <field name="name">account.payment.inherit</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="sq_code"/>
+            </xpath>
+        </field>
+    </record>
+
+    <report
+            id="action_new_report_payment_receipt"
+            model="account.payment"
+            string="New Payment Receipt"
+            report_type="qweb-pdf"
+            name="new_payment_report.new_report_payment_receipt"
+            file="new_payment_report.new_report_payment_receipt"
+    />
+    <template id="new_report_payment_receipt">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" dir="rtl">
+                        <table width="100%" dir="rtl">
+                            <tr>
+                                <td>
+                                    <strong>خزينه بالجنية
+                                        <br/>
+                                    </strong>
+
+                                </td>
+                                <td>
+                                    <t t-if="o.payment_type == 'inbound'">
+                                        <strong>قبض نقدى
+                                            <br/>
+                                        </strong>
+                                    </t>
+                                    <t t-else="">
+                                        <strong>صرف نقدى
+                                            <br/>
+                                        </strong>
+                                    </t>
+                                </td>
+                                <td>
+                                    <strong>عهد موظفين-
+                                        <span t-field="o.partner_id"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+
+                                    <strong>
+                                        <span t-field="o.sq_code"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>التاريخ:
+                                        <span t-field="o.date"/>
+                                    </strong>
+                                    <br/>
+                                </td>
+                                <td/>
+
+                                <td>
+                                    <strong>جنية
+                                        <br/>
+                                    </strong>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>إستلمنا من:
+                                        <span t-field="o.partner_id"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td/>
+                                <td>
+                                    <strong>مبلغ:
+                                        <span t-field="o.amount"/>
+                                        <br/>
+                                    </strong>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>مبلغ وقدره:
+                                        <span t-field="o.text_amount"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <br/>
+                                <br/>
+
+                                <td/>
+                                <td/>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>وذلك مقابل
+                                        <span t-field="o.ref"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td/>
+                                <td/>
+
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>المستلم
+                                        <br/>
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    <strong>المحاسبه
+                                        <br/>
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    <strong>تعتمد
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <hr/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <table width="100%" dir="rtl">
+                            <tr>
+                                <td>
+                                    <strong>خزينه بالجنية
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <t t-if="o.payment_type == 'inbound'">
+                                        <strong>قبض نقدى
+                                            <br/>
+                                        </strong>
+                                    </t>
+                                    <t t-else="">
+                                        <strong>صرف نقدى
+                                            <br/>
+                                        </strong>
+                                    </t>
+
+                                </td>
+                                <td>
+                                    <strong>عهد موظفين-
+                                        <span t-field="o.partner_id"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <span t-field="o.sq_code"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>التاريخ:
+                                        <span t-field="o.date"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td/>
+
+                                <td>
+                                    <strong>جنية
+                                        <br/>
+                                    </strong>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>إستلمنا من:
+                                        <span t-field="o.partner_id"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td/>
+                                <td>
+                                    <strong>مبلغ:
+                                        <span t-field="o.amount"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>مبلغ وقدره:
+                                        <span t-field="o.text_amount"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+
+                                <td/>
+                                <td/>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>وذلك مقابل
+                                        <span t-field="o.ref"/>
+                                    </strong>
+                                </td>
+                                <td/>
+                                <td/>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>المستلم
+                                        <br/>
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    <strong>المحاسبه
+                                        <br/>
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    <strong>تعتمد
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report
+            id="action_new_report_statement"
+            model="account.move.line"
+            string="Receip Report"
+            report_type="qweb-pdf"
+            name="new_payment_report.new_report_statement"
+            file="new_payment_report.new_report_statement"
+    />
+    <template id="new_report_statement">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" dir="rtl">
+                        <table width="100%" dir="rtl" border="0">
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <br/>
+                                        خزينه بالجنية
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <t t-if="o.credit > 0.0">
+                                        <strong>
+                                            <br/>
+                                            قبض نقدى
+                                            <br/>
+                                            <span t-field="o.move_id.name"/>
+                                            <br/>
+                                            <t t-if="o.payment_id">
+                                            <span t-field="o.payment_id.sq_code"/>
+                                            <br/>
+                                            </t>
+                                        </strong>
+                                    </t>
+                                    <t t-if="o.debit > 0.0">
+                                        <strong><br/>صرف نقدى
+                                            <br/>
+                                            <span t-field="o.move_id.name"/>
+                                            <br/>
+                                            <t t-if="o.payment_id">
+                                            <span t-field="o.payment_id.sq_code"/>
+                                            <br/>
+                                            </t>
+                                        </strong>
+                                    </t>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <br/>
+                                        عهد موظفين- <span t-field="o.partner_id"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>التاريخ:
+                                        <span t-field="o.date"/>
+                                        <br/>
+                                    </strong>
+                                    <br/>
+                                </td>
+                                <td/>
+                                <td>
+                                    <strong> جنية
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <strong>إستلمنا من:
+                                        <span t-field="o.partner_id"/>
+                                        <br/>
+                                    </strong>
+                                    <br/>
+                                </td>
+<!--                                <td/>-->
+                                <td>
+                                    <t t-if="o.credit > 0.0">
+                                        <strong>مبلغ:
+                                            <span t-field="o.credit"/>
+                                            <br/>
+                                        </strong>
+                                    </t>
+                                    <t t-if="o.debit > 0.0">
+                                        <strong>  مبلغ:
+                                            <span t-field="o.debit"/>
+                                            <br/>
+                                        </strong>
+                                    </t>
+                                    <br/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>  مبلغ وقدره:
+                                        <span t-field="o.text_amount"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td/>
+                                <td/>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3">
+                                    <strong> وذلك مقابل
+                                        <span t-field="o.name"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+<!--                                <td/>-->
+<!--                                <td/>-->
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>المستلم
+                                        <br/>
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    <strong>المحاسبه
+                                        <br/>
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    <strong>تعتمد
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <strong>
+                                    <br/>
+                                    <br/>تم بواسطة
+                                        <span t-field="o.create_uid.name"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <hr/>
+                        <br/>
+                        <table width="100%" dir="rtl" border="0">
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <br/>
+                                        خزينه بالجنية
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <t t-if="o.credit > 0.0">
+                                        <strong>
+                                            <br/>
+                                            قبض نقدى
+                                            <br/>
+                                            <span t-field="o.move_id.name"/>
+                                            <br/>
+                                            <t t-if="o.payment_id">
+                                            <span t-field="o.payment_id.sq_code"/>
+                                            <br/>
+                                            </t>
+                                        </strong>
+                                    </t>
+                                    <t t-if="o.debit > 0.0">
+                                        <strong><br/>صرف نقدى
+                                            <br/>
+                                            <span t-field="o.move_id.name"/>
+                                            <br/>
+                                            <t t-if="o.payment_id">
+                                            <span t-field="o.payment_id.sq_code"/>
+                                            <br/>
+                                            </t>
+                                        </strong>
+                                    </t>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <br/>
+                                        عهد موظفين- <span t-field="o.partner_id"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>التاريخ:
+                                        <span t-field="o.date"/>
+                                        <br/>
+                                    </strong>
+                                    <br/>
+                                </td>
+                                <td/>
+                                <td>
+                                    <strong> جنية
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <strong>إستلمنا من:
+                                        <span t-field="o.partner_id"/>
+                                        <br/>
+                                    </strong>
+                                    <br/>
+                                </td>
+<!--                                <td/>-->
+                                <td>
+                                    <t t-if="o.credit > 0.0">
+                                        <strong>مبلغ:
+                                            <span t-field="o.credit"/>
+                                            <br/>
+                                        </strong>
+                                    </t>
+                                    <t t-if="o.debit > 0.0">
+                                        <strong>  مبلغ:
+                                            <span t-field="o.debit"/>
+                                            <br/>
+                                        </strong>
+                                    </t>
+                                    <br/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>  مبلغ وقدره:
+                                        <span t-field="o.text_amount"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                                <td/>
+                                <td/>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3">
+                                    <strong> وذلك مقابل
+                                        <span t-field="o.name"/>
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <br/>
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>المستلم
+                                        <br/>
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    <strong>المحاسبه
+                                        <br/>
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    <strong>تعتمد
+                                        <br/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <br/>
+                                    <br/>
+                                </td>
+                                <td>
+                                    <strong>
+                                    <br/>
+                                    <br/>تم بواسطة
+                                        <span t-field="o.create_uid.name"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="code_sq_payment_customer_invoice" model="ir.sequence">
+        <field name="name">Payments customer invoices sq_code</field>
+        <field name="code">account.payment.customer.invoice</field>
+        <field name="prefix">CUST.IN/%(range_year)s/</field>
+        <field name="padding">4</field>
+        <field eval="False" name="company_id"/>
+    </record>
+    <record id="code_sq_payment_customer_refund" model="ir.sequence">
+        <field name="name">Payments customer credit notes sq_code</field>
+        <field name="code">account.payment.customer.refund</field>
+        <field name="prefix">CUST.OUT/%(range_year)s/</field>
+        <field eval="False" name="company_id"/>
+        <field name="padding">4</field>
+    </record>
+    <record id="code_sq_payment_supplier_invoice" model="ir.sequence">
+        <field name="name">Payments supplier invoices sq_code</field>
+        <field name="code">account.payment.supplier.invoice</field>
+        <field name="prefix">SUPP.OUT/%(range_year)s/</field>
+        <field eval="False" name="company_id"/>
+        <field name="padding">4</field>
+    </record>
+    <record id="code_sq_payment_supplier_refund" model="ir.sequence">
+        <field name="name">Payments supplier credit notes sq_code</field>
+        <field name="code">account.payment.supplier.refund</field>
+        <field name="prefix">SUPP.IN/%(range_year)s/</field>
+        <field eval="False" name="company_id"/>
+        <field name="padding">4</field>
+    </record>
+</odoo>
