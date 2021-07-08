@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 
+
 class centerpoint(models.Model):
     _inherit = 'project.project'
 
@@ -10,6 +11,8 @@ class insurance(models.Model):
     _inherit = 'account.move'
 
     contracting_insurance = fields.Boolean(string="Contracting Insurance")
+
+
 class NewModule(models.Model):
     _inherit = 'account.move.line'
 
