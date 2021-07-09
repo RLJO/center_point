@@ -67,7 +67,6 @@ class NewAccountMoveLine(models.Model):
                 rec.cant_edit = False
             print(rec.cant_edit)
 
-
     # @api.multi
     @api.depends('balance')
     def amount_to_text(self):
